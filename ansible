@@ -1,0 +1,19 @@
+#Подготовка "родителя"
+##Подключаем репозиторий Ansible
+
+''''
+sudo apt-add-repository ppa:ansible/ansible
+''''
+##Обновляем информацию о пакетах 
+''''
+sudo apt-get update
+''''
+
+##Устанавливаем Ansible
+''''
+sudo apt-get install ansible
+''''
+##Проверяем версию и сгенерированые конфигурвции
+''''
+ansible --version
+''''
