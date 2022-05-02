@@ -1,0 +1,49 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Создаем пользователя с именем user1
+      user:
+        name: user1
+        comment: Поле для комментариев
+
+    - name: Создаем пользователя user2 с паролем
+      user:
+        name: user2
+        password: "{{ user_password }}"  #Переменная принимающая хеш пароля 
+        update_password: on_create
+
+    - name: Создаем группу group1
+      group:
+        name: group1
+        state: present
+
+
+    - name: Создаем пользователя user3 и добавляем его в группу group1
+      user:
+        name: user3
+        groups: group1
+        append: yes
+
+    - name: Создаем пользователя user4 и генерируем для него SSH-ключ
+      user:
+        name: user4
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+
+
+    - name: Создаем пользователя user5 без домашнего каталога и устанавливаем срок действия учетной записи
+      user:
+        name: noHome
+        create_home: no
+        expires: 1651496788 #Unix time
+
+
+    - name: Установить authorized key из файла id_rsa.pub
+      authorized_key:
+        user: user4
+        state: present
+        key: "{{ lookup('file', '/home/user_ansible/.ssh/id_rsa.pub') }}"
+
