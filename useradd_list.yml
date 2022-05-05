@@ -5,21 +5,21 @@
   tasks:
     - name: Создаем пользователя user1 с паролем
       user:
-        name: user1
+        name: "{{ user_1 }}" 
         password: "{{ user_password_1 }}"   
         update_password: on_create
 
 
     - name: Создаем пользователя user2 с паролем
       user:
-        name: user2
+        name: "{{ user_2 }}"
         password: "{{ user_password_2 }}"   
         update_password: on_create    
 
 
     - name: Создаем пользователя user3 с паролем
       user:
-        name: user3
+        name: "{{ user_3 }}"
         password: "{{ user_password_3 }}" 
         update_password: on_create   
 
