@@ -1,0 +1,46 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Создаем пользователя user1 с паролем
+      user:
+        name: user1
+        password: "{{ user_password_1 }}"   
+        update_password: on_create
+
+
+    - name: Создаем пользователя user2 с паролем
+      user:
+        name: user2
+        password: "{{ user_password_2 }}"   
+        update_password: on_create    
+
+
+    - name: Создаем пользователя user3 с паролем
+      user:
+        name: user3
+        password: "{{ user_password_3 }}" 
+        update_password: on_create   
+
+
+    - name: Установить authorized key из файла id_rsa.pub для пользователя user1
+      authorized_key:
+        user: user1
+        state: present
+        key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
+
+
+    - name: Установить authorized key из файла id_rsa.pub для пользователя user2
+      authorized_key:
+        user: user2
+        state: present
+        key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
+
+
+    - name: Установить authorized key из файла id_rsa.pub для пользователя user3
+      authorized_key:
+        user: user3
+        state: present
+        key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
+
