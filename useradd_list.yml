@@ -26,21 +26,21 @@
 
     - name: Установить authorized key из файла id_rsa.pub для пользователя user1
       authorized_key:
-        user: user1
+        user: "{{ user_1 }}" 
         state: present
         key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
 
 
     - name: Установить authorized key из файла id_rsa.pub для пользователя user2
       authorized_key:
-        user: user2
+        user: "{{ user_2 }}" 
         state: present
         key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
 
 
     - name: Установить authorized key из файла id_rsa.pub для пользователя user3
       authorized_key:
-        user: user3
+        user: "{{ user_3 }}" 
         state: present
         key: "{{ lookup('file', '/"the path to the file"/"title".pub') }}"
 
