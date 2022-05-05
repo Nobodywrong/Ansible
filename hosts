@@ -1,0 +1,14 @@
+
+[ubuntu-servers]
+test1 10.0.0.1 ansible_user=user_test1
+test2 10.0.0.2 ansible_user=user_test2
+test3 10.0.0.3 ansible_user=user_test3
+
+[all:vars]
+user_password_1=хеш пароля 1
+user_password_2=хеш пароля 2
+user_password_3=хеш пароля 3
+
+user_1=case1
+user_2=case2
+user_3=case3
