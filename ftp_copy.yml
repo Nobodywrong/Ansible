@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Загрузка файла с FTP сервера
+      get_url:
+        url: ftp://ftp-user:ftp-password@ftp-host:ftp-port/path/to/file #Указываем паметры подключения к FTP и путь до файла, который необходим о забрать
+        dest: /path/to_directory #Указываем путь, куда необходимо положить
+      register: get_url_result
+
+    - name: Загрузка ариха с FTP сервера
+      get_url:
+        url: ftp://ftp-user:ftp-password@ftp-host:ftp-port/path/to/file.zip #Указываем параметры подключения к FTP и путь до файла, который необходим о забрать
+        dest: /path/to_directory #Указываем путь, куда необходимо положить
+      register: get_url_result
+
+    - name: Разархивирование выгруженного с FTP zip архива
+      ansible.builtin.unarchive:
+        src: /path/to/file.zip #Указываем путь по которому лежит нужный zip архив
+        dest: /path/to_directory #Указываем путь, где будет распаковка
+        remote_src: yes
+        keep_newer: yes
+
+    - name: Переименовываем распакованный архив
+      command: mv /path/to/file.zip /path/to/file
+
+    - name: Перенос распакованного архива в рабочую папку
+      command: mv -u /path/to/file /path/to_directory
